@@ -20,7 +20,7 @@ export function WaitlistForm({ className, size = "lg" }: { className?: string; s
     e.preventDefault();
     const value = email.trim();
     if (!isValidEmail(value)) {
-      setState({ kind: "error", message: "That email looks off — give it another try." });
+      setState({ kind: "error", message: "Please enter a valid email address." });
       return;
     }
     setState({ kind: "submitting" });
@@ -32,35 +32,35 @@ export function WaitlistForm({ className, size = "lg" }: { className?: string; s
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; duplicate?: boolean; message?: string };
       if (!res.ok) {
-        setState({ kind: "error", message: data.message ?? "Couldn't sign you up. Try again in a minute." });
+        setState({ kind: "error", message: data.message ?? "Could not register your email. Please try again." });
         return;
       }
       setState({ kind: "ok", duplicate: !!data.duplicate });
     } catch {
-      setState({ kind: "error", message: "Network hiccup. Try again." });
+      setState({ kind: "error", message: "Network error. Please try again." });
     }
   }
 
-  const inputSize = size === "xl" ? "h-14 text-base" : "h-12 text-base";
+  const inputSize = size === "xl" ? "h-14 text-base" : "h-12 text-sm";
   const buttonSize = size === "xl" ? "xl" : "lg";
 
   if (state.kind === "ok") {
     return (
       <div
         className={cn(
-          "flex items-center gap-3 rounded-[var(--radius-lg)] border border-default bg-surface px-5 py-4 shadow-soft",
+          "flex items-center gap-3 hairline bg-surface px-5 py-4",
           className,
         )}
       >
-        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--success)]/15 text-[var(--success)]">
-          <Check className="h-5 w-5" strokeWidth={2} />
+        <span className="inline-flex h-9 w-9 items-center justify-center hairline-strong text-[var(--success)]">
+          <Check className="h-5 w-5" strokeWidth={1.75} />
         </span>
         <div className="text-sm">
           <p className="font-medium text-ink">
-            {state.duplicate ? "You're already on the list." : "You're in. Welcome aboard."}
+            {state.duplicate ? "Already registered." : "Registered."}
           </p>
           <p className="text-ink-muted">
-            We&apos;ll email when v1.0 opens up and when new features ship.
+            You will receive an email when v1.0 is publicly available.
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@ export function WaitlistForm({ className, size = "lg" }: { className?: string; s
         />
         <Button type="submit" size={buttonSize} disabled={state.kind === "submitting"}>
           {state.kind === "submitting" ? <Loader2 className="animate-spin" /> : null}
-          {state.kind === "submitting" ? "Adding…" : "Join the waitlist"}
+          {state.kind === "submitting" ? "Submitting" : "Join the waitlist"}
           {state.kind === "idle" ? <ArrowRight /> : null}
         </Button>
       </div>
@@ -95,7 +95,7 @@ export function WaitlistForm({ className, size = "lg" }: { className?: string; s
         </p>
       ) : (
         <p className="text-[13px] text-ink-faint">
-          Free during beta · No spam · One email per launch milestone
+          No account required. One email per release milestone.
         </p>
       )}
     </form>

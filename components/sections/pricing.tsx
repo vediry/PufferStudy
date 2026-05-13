@@ -1,72 +1,63 @@
-import { Sparkle, Lock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const FEATURES = [
+  "Unlimited subjects",
+  "Unlimited images per subject",
+  "Printable one-page cheat sheets",
+  "Works offline after the first load",
+  "Bring your own Gemini API key",
+];
 
 export function Pricing() {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   return (
-    <section className="border-b border-default py-20 sm:py-28">
-      <div className="mx-auto max-w-[1120px] px-4 sm:px-8">
-        <div className="mb-12 flex flex-col items-center gap-3 text-center">
-          <span className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--primary)]">
-            Pricing
-          </span>
-          <h2 className="max-w-[680px] text-[2rem] font-bold leading-[1.15] tracking-tight text-ink sm:text-[2.5rem]">
-            Free during beta. Free forever for the core flow.
-          </h2>
+    <section id="pricing" className="hairline-b py-24 md:py-32">
+      <div className="mx-auto max-w-2xl px-6 text-center">
+        <p className="section-label">Pricing</p>
+        <h2 className="mt-4 display-tight text-4xl font-semibold tracking-tight text-ink md:text-[2.75rem]">
+          One plan. No tiers.
+        </h2>
+
+        <div className="mt-14 hairline bg-surface backdrop-blur-xl p-10 text-left md:p-12">
+          <p className="section-label text-center">Open beta</p>
+          <p className="mt-6 text-center text-6xl font-semibold tracking-tight text-ink">
+            Free
+          </p>
+          <p className="mt-3 text-center text-sm text-ink-muted">
+            Available at no cost during the open beta period.
+          </p>
+
+          <ul className="mt-10 flex flex-col hairline-t">
+            {FEATURES.map((f) => (
+              <li
+                key={f}
+                className="flex items-center justify-between hairline-b py-4 text-sm text-ink"
+              >
+                <span>{f}</span>
+                <span className="text-ink-faint text-xs tabular">Included</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10">
+            {appUrl ? (
+              <Button asChild size="lg" className="w-full">
+                <a href={appUrl} target="_blank" rel="noopener">
+                  Open the app ↗
+                </a>
+              </Button>
+            ) : (
+              <Button asChild size="lg" variant="secondary" className="w-full">
+                <a href="#cta">Join the waitlist</a>
+              </Button>
+            )}
+          </div>
         </div>
-        <div className="mx-auto grid max-w-[920px] grid-cols-1 gap-5 md:grid-cols-2">
-          <article className="flex flex-col gap-4 rounded-[var(--radius-lg)] border border-default bg-surface p-8 shadow-soft">
-            <div className="flex items-center gap-2 text-[var(--primary)]">
-              <Sparkle className="h-5 w-5" strokeWidth={1.75} />
-              <span className="text-sm font-medium uppercase tracking-wider">v1.0 · Today</span>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-[2.5rem] font-bold tracking-tight text-ink">$0</span>
-              <span className="text-sm text-ink-muted">/ forever during beta</span>
-            </div>
-            <ul className="flex flex-col gap-2.5 text-[15px] text-ink-muted">
-              <Bullet>Unlimited subjects, unlimited photos</Bullet>
-              <Bullet>Cheat sheet generation from your notes</Bullet>
-              <Bullet>Print or save as PDF, with the print stylesheet tuned</Bullet>
-              <Bullet>Light + dark mode</Bullet>
-              <Bullet>Your own Gemini API key (free from Google)</Bullet>
-            </ul>
-          </article>
-          <article className="flex flex-col gap-4 rounded-[var(--radius-lg)] border border-default border-dashed bg-surface-2/60 p-8">
-            <div className="flex items-center gap-2 text-ink-faint">
-              <Lock className="h-5 w-5" strokeWidth={1.75} />
-              <span className="text-sm font-medium uppercase tracking-wider">Coming later</span>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-[2.5rem] font-bold tracking-tight text-ink-muted">$—</span>
-              <span className="text-sm text-ink-faint">/ on PufferStudy&apos;s own AI</span>
-            </div>
-            <ul className="flex flex-col gap-2.5 text-[15px] text-ink-muted">
-              <Bullet dim>Skip the API key — we cover the AI cost</Bullet>
-              <Bullet dim>Homework chat scoped to your notes</Bullet>
-              <Bullet dim>Auto-generated practice quizzes</Bullet>
-              <Bullet dim>Share a cheat sheet via link</Bullet>
-              <Bullet dim>Cross-device sync</Bullet>
-            </ul>
-            <p className="mt-2 text-[13px] text-ink-faint">
-              Waitlist members get the first invites and early-bird pricing.
-            </p>
-          </article>
-        </div>
+
+        <p className="mt-8 text-xs text-ink-faint">
+          Additional features in active development. Waitlist members receive early access.
+        </p>
       </div>
     </section>
-  );
-}
-
-function Bullet({ children, dim }: { children: React.ReactNode; dim?: boolean }) {
-  return (
-    <li className="flex items-start gap-2.5">
-      <span
-        className={
-          dim
-            ? "mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-ink-faint"
-            : "mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)]"
-        }
-      />
-      <span>{children}</span>
-    </li>
   );
 }

@@ -24,8 +24,9 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={() => setTheme(ORDER[(ORDER.indexOf(current) + 1) % ORDER.length])}
       aria-label={`Theme: ${LABEL[current]}. Click to change.`}
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] border border-default text-ink-muted",
+        "inline-flex h-11 w-11 items-center justify-center rounded-none text-ink-muted",
         "transition-colors hover:bg-surface-2 hover:text-ink",
+        "focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2",
         className,
       )}
     >
