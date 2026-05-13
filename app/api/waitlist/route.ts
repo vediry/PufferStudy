@@ -40,7 +40,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const existing = await list({ prefix, limit: 1 });
+    const existing = await list({ prefix, limit: 1, mode: "expanded" });
     if (existing.blobs.length > 0) {
       return ok({ stored: true, duplicate: true });
     }
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       `${prefix}${ts.replace(/[:.]/g, "-")}.json`,
       JSON.stringify({ email, ts, ua: req.headers.get("user-agent") ?? null }),
       {
-        access: "public",
+        access: "private",
         contentType: "application/json",
         addRandomSuffix: false,
       },
