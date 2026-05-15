@@ -2,21 +2,21 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Monitor, type LucideIcon } from "lucide-react";
+import { Moon, Sun, Trees, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const ORDER = ["light", "dark", "system"] as const;
+const ORDER = ["light", "dark", "forest"] as const;
 type Mode = (typeof ORDER)[number];
 
-const ICONS: Record<Mode, LucideIcon> = { light: Sun, dark: Moon, system: Monitor };
-const LABEL: Record<Mode, string> = { light: "Light", dark: "Dark", system: "System" };
+const ICONS: Record<Mode, LucideIcon> = { light: Sun, dark: Moon, forest: Trees };
+const LABEL: Record<Mode, string> = { light: "Light", dark: "Dark", forest: "Forest" };
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
-  const current = (mounted ? (theme as Mode) : "system") ?? "system";
-  const Icon = ICONS[current] ?? Monitor;
+  const current = (mounted && ORDER.includes(theme as Mode) ? (theme as Mode) : "light");
+  const Icon = ICONS[current];
 
   return (
     <button

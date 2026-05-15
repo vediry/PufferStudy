@@ -34,7 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={publicSans.variable}>
       <body className="landing min-h-dvh bg-canvas text-ink">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          themes={["light", "dark", "forest"]}
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
