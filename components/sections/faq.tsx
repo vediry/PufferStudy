@@ -3,19 +3,19 @@ import { Plus, Minus } from "lucide-react";
 const FAQ = [
   {
     q: "What does PufferStudy do?",
-    a: "It turns photos of your study material into a single printable cheat sheet ahead of a test. You upload images of notes, homework, or packets, group them by subject, and generate the sheet on demand.",
+    a: "It turns photos and PDFs of your study material into a single printable cheat sheet ahead of a test. You upload images of notes, homework, or packets (or snap them with your phone camera), group them by subject, and generate the sheet on demand.",
   },
   {
     q: "Where is my data stored?",
-    a: "Locally in your browser. Images live in IndexedDB; subject metadata lives in localStorage. Clearing browser data will erase your subjects, so treat the app as a workspace and keep your originals.",
+    a: "In your PufferStudy account, securely. Your subjects and uploaded files sync to the cloud so they follow you across devices. The only thing that stays browser-local is your Gemini API key.",
   },
   {
     q: "Do I need an account?",
-    a: "No. You provide a Gemini API key, which is stored in your browser only. The free tier from Google covers most study sessions and requires no payment information.",
+    a: "Yes. Sign up with email or Google (it takes 10 seconds) so your subjects can sync across phone, laptop, and school computer. You'll also need a free Google Gemini API key for AI generation.",
   },
   {
     q: "How much does it cost?",
-    a: "PufferStudy is free during the open beta. Any AI usage costs are billed to your own Gemini account by Google — typically zero at the free tier.",
+    a: "PufferStudy is free during the open beta. AI usage is billed to your own Gemini account by Google — typically zero at the free tier. Storage of your subjects and files is included.",
   },
   {
     q: "Does it work on a school Chromebook?",

@@ -2,12 +2,12 @@ import { Check } from "lucide-react";
 
 const GUARANTEES = [
   {
-    title: "Local storage",
-    body: "Images and notes are stored in your browser. Nothing transmitted to our servers.",
+    title: "Private to your account",
+    body: "Subjects and uploads are scoped to your account. Only you can see them.",
   },
   {
     title: "Bring-your-own AI key",
-    body: "Cheat sheet generation uses your Gemini API key. The key stays in your browser.",
+    body: "Cheat sheet generation uses your Gemini API key. The key stays in your browser only — we never store it.",
   },
   {
     title: "No tracking",
@@ -27,12 +27,12 @@ export function Privacy() {
           <div>
             <p className="section-label">Data handling</p>
             <h2 className="mt-4 display-tight text-4xl font-semibold tracking-tight text-ink md:text-[2.75rem]">
-              Your study material stays on your device.
+              Your study material is private to your account.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted">
-              PufferStudy operates entirely in your browser. Photos are stored locally in
-              IndexedDB. Subject metadata lives in localStorage. We do not transmit your
-              study material to any server we control.
+              Sign in once and your subjects follow you across devices. Files
+              and notes are stored securely under your account on Vercel infrastructure.
+              Your Gemini API key always stays in your browser — it never touches our servers.
             </p>
           </div>
 
