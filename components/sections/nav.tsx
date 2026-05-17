@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { Show } from "@clerk/nextjs";
 import { PufferLogo } from "@/components/puffer-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 
 export function Nav() {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy.vercel.app";
   return (
     <header className="sticky top-0 z-40 hairline-b bg-canvas/80 backdrop-blur-xl supports-[backdrop-filter]:bg-canvas/70">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -31,13 +32,19 @@ export function Nav() {
           >
             FAQ
           </Link>
-          {appUrl ? (
+          <Show when="signed-out">
             <Button asChild size="sm" variant="ghost" className="hidden sm:inline-flex">
-              <a href={appUrl} target="_blank" rel="noopener">
-                Open app ↗
-              </a>
+              <Link href="/sign-in">Sign in</Link>
             </Button>
-          ) : null}
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <Link href="/sign-up">Get started</Link>
+            </Button>
+          </Show>
+          <Show when="signed-in">
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <a href={appUrl}>Open app →</a>
+            </Button>
+          </Show>
           <ThemeToggle />
         </nav>
       </div>

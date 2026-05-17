@@ -1,4 +1,4 @@
-import { WaitlistForm } from "@/components/waitlist-form";
+import { GetStartedCTA } from "@/components/get-started-cta";
 
 export function Hero() {
   return (
@@ -13,11 +13,11 @@ export function Hero() {
             Capture homework, notes, and packets. PufferStudy organizes the material into a
             single-page cheat sheet — without storing your data on any server.
           </p>
-          <div className="mt-10 max-w-[520px]">
-            <WaitlistForm size="xl" />
+          <div className="mt-10">
+            <GetStartedCTA />
           </div>
           <p className="mt-6 max-w-md text-xs text-ink-faint">
-            No account required. Email used only to notify you when the next release ships.
+            Free during the open beta. Bring your own AI key — your notes stay in your browser.
           </p>
         </div>
 

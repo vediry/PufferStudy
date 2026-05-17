@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -32,17 +33,37 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={publicSans.variable}>
-      <body className="landing min-h-dvh bg-canvas text-ink">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          themes={["light", "dark", "forest"]}
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "var(--primary)",
+          colorBackground: "var(--surface)",
+          colorText: "var(--ink)",
+          colorTextSecondary: "var(--ink-muted)",
+          colorInputBackground: "var(--surface-2)",
+          colorInputText: "var(--ink)",
+          borderRadius: "0",
+          fontFamily: "var(--font-public-sans)",
+        },
+        elements: {
+          card: "shadow-card border border-default rounded-none",
+          formButtonPrimary: "rounded-none",
+          formFieldInput: "rounded-none",
+        },
+      }}
+    >
+      <html lang="en" suppressHydrationWarning className={publicSans.variable}>
+        <body className="landing min-h-dvh bg-canvas text-ink">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            themes={["light", "dark", "forest"]}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
