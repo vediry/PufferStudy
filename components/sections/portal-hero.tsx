@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy.vercel.app";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy-app.vercel.app";
 
 export function PortalHero() {
   return (

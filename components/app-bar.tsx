@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ThemePicker } from "@/components/theme-picker";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy.vercel.app";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy-app.vercel.app";
 
 export function AppBar() {
   return (

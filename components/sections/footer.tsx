@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy.vercel.app";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://pufferstudy-app.vercel.app";
 
 export function Footer() {
   return (
