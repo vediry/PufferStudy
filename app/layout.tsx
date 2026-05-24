@@ -1,46 +1,61 @@
 import type { Metadata, Viewport } from "next";
-import { Public_Sans } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Manrope, Instrument_Serif } from "next/font/google";
+import { ThemeProvider, ThemeAntiFlashScript } from "@/components/theme-provider";
+import { AppBar } from "@/components/app-bar";
 import "./globals.css";
 
-const publicSans = Public_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-public-sans",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "PufferStudy — Turn your notes into a printable cheat sheet",
+  title: "PufferStudy — Your study workspace",
   description:
-    "Capture photos of your homework, notes, and packets. PufferStudy organizes them into a single-page cheat sheet before your test — without storing your data on any server.",
+    "Per-subject hub for notes, cheat sheets, chat, assignments, and more.",
   applicationName: "PufferStudy",
   openGraph: {
-    title: "PufferStudy — Turn your notes into a printable cheat sheet",
+    title: "PufferStudy — Your study workspace",
     description:
-      "A study aid that reads your photos and generates a printable cheat sheet. v1.0 — available at no cost during the open beta.",
+      "A focused workspace for your notes, cheat sheets, chat, and practice — one place per subject.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FBF7EE" },
-    { media: "(prefers-color-scheme: dark)", color: "#0A0A0F" },
+    { media: "(prefers-color-scheme: light)", color: "#faf6ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#1c1b18" },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={publicSans.variable}>
-      <body className="landing min-h-dvh bg-canvas text-ink">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          themes={["light", "dark", "forest"]}
-          disableTransitionOnChange
-        >
-          {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-theme="atelier"
+      className={`${manrope.variable} ${instrumentSerif.variable}`}
+    >
+      <head>
+        <ThemeAntiFlashScript />
+      </head>
+      <body className="min-h-dvh">
+        <ThemeProvider>
+          <div className="flex min-h-dvh flex-col">
+            <AppBar />
+            <main className="flex-1">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

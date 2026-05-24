@@ -4,32 +4,34 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-none font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-[18px] [&_svg]:shrink-0",
+  "glow-on-hover inline-flex items-center justify-center gap-2 rounded-[var(--radius)] font-medium transition-all duration-150 focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-[18px] [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary:
-          "bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary-hover)] active:bg-[var(--primary-active)]",
+          "bg-[var(--primary)] text-[var(--primary-foreground)] shadow-[0_1px_2px_rgba(184,68,28,0.18)] hover:bg-[var(--primary-hover)] active:bg-[var(--primary-active)]",
         secondary:
-          "border border-default bg-surface text-ink hover:border-strong hover:bg-surface-2",
+          "border border-strong bg-surface text-ink hover:bg-surface-2",
         ghost:
           "text-ink-muted hover:bg-surface-2 hover:text-ink",
         outline:
-          "border border-default bg-transparent text-ink hover:border-strong hover:bg-surface-2",
-        "outline-primary":
-          "border border-[var(--primary)] bg-transparent text-[var(--primary)] hover:bg-[var(--primary)]/8",
+          "border border-default bg-transparent text-ink hover:bg-surface-2",
+        danger:
+          "bg-[var(--danger)] text-white hover:opacity-90 active:opacity-80",
         link:
           "text-[var(--primary)] underline-offset-4 hover:underline",
       },
       size: {
         sm: "h-9 px-3 text-sm",
-        md: "h-11 px-5 text-sm",
-        lg: "h-12 px-6 text-sm",
-        xl: "h-14 px-7 text-base",
-        icon: "h-11 w-11",
+        md: "h-10 px-4 text-sm",
+        lg: "h-11 px-5 text-base",
+        icon: "h-10 w-10",
       },
     },
-    defaultVariants: { variant: "primary", size: "md" },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
   },
 );
 
@@ -42,7 +44,13 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+    return (
+      <Comp
+        ref={ref}
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...props}
+      />
+    );
   },
 );
 Button.displayName = "Button";
